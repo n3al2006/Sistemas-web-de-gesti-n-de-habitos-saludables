@@ -1,0 +1,200 @@
+/* Dashboard User CSS - Based on HabitHub theme */
+
+#bg-dashboard-user {
+    background-color: #27293d;
+    color: #ffffff;
+}
+
+#bg-dashboard-user .min-h-screen {
+    background: linear-gradient(to bottom right, #27293d, #1a1c2d);
+    background-image: url('/images/habit-hub-bg-pattern.svg');
+    background-size: cover;
+    background-attachment: fixed;
+}
+
+#bg-dashboard-user header {
+    background-color: rgba(0, 0, 0, 0.3);
+    backdrop-filter: blur(5px);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+#bg-dashboard-user main {
+    padding: 2rem;
+}
+
+#bg-dashboard-user nav {
+    background-color: rgba(0, 0, 0, 0.2);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+/* Buttons and accent elements */
+#bg-dashboard-user .btn-primary,
+#bg-dashboard-user button[type="submit"],
+#bg-dashboard-user .accent-button {
+    background-color: #00d5b1;
+    color: #27293d;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    border-radius: 9999px;
+    padding: 0.5rem 1.5rem;
+    border: none;
+}
+
+#bg-dashboard-user .btn-primary:hover,
+#bg-dashboard-user button[type="submit"]:hover,
+#bg-dashboard-user .accent-button:hover {
+    background-color: #00f2c9;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 213, 177, 0.3);
+}
+
+/* Dashboard cards and containers */
+#bg-dashboard-user .dashboard-card {
+    background-color: rgba(255, 255, 255, 0.07);
+    border-radius: 1rem;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    padding: 1.5rem;
+    transition: all 0.3s ease;
+}
+
+#bg-dashboard-user .dashboard-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    border-color: rgba(0, 213, 177, 0.3);
+}
+
+/* Typography */
+#bg-dashboard-user h1, 
+#bg-dashboard-user h2, 
+#bg-dashboard-user h3 {
+    color: #ffffff;
+    font-weight: 600;
+}
+
+#bg-dashboard-user h1 {
+    font-size: 2.25rem;
+    line-height: 2.5rem;
+    margin-bottom: 1.5rem;
+}
+
+#bg-dashboard-user p {
+    color: rgba(255, 255, 255, 0.8);
+}
+
+/* Links */
+#bg-dashboard-user a {
+    color: #00d5b1;
+    transition: all 0.2s ease;
+}
+
+#bg-dashboard-user a:hover {
+    color: #00f2c9;
+    text-decoration: none;
+}
+
+/* Tables */
+#bg-dashboard-user table {
+    background-color: rgba(255, 255, 255, 0.05);
+    border-radius: 0.5rem;
+    overflow: hidden;
+    width: 100%;
+}
+
+#bg-dashboard-user th {
+    background-color: rgba(0, 0, 0, 0.2);
+    color: #ffffff;
+    font-weight: 500;
+    text-align: left;
+    padding: 0.75rem 1rem;
+}
+
+#bg-dashboard-user td {
+    padding: 0.75rem 1rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+#bg-dashboard-user tr:last-child td {
+    border-bottom: none;
+}
+
+/* Form elements */
+#bg-dashboard-user input, 
+#bg-dashboard-user select, 
+#bg-dashboard-user textarea {
+    background-color: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    color: #ffffff;
+    border-radius: 0.5rem;
+    padding: 0.5rem 1rem;
+}
+
+#bg-dashboard-user input:focus, 
+#bg-dashboard-user select:focus, 
+#bg-dashboard-user textarea:focus {
+    border-color: #00d5b1;
+    outline: none;
+    box-shadow: 0 0 0 2px rgba(0, 213, 177, 0.2);
+}
+
+/* Progress indicators */
+#bg-dashboard-user .progress-bar {
+    background-color: rgba(255, 255, 255, 0.1);
+    border-radius: 9999px;
+    height: 0.5rem;
+    overflow: hidden;
+}
+
+#bg-dashboard-user .progress-value {
+    background-color: #00d5b1;
+    height: 100%;
+    border-radius: 9999px;
+}
+
+/* Navigation menu */
+#bg-dashboard-user .nav-link {
+    color: rgba(255, 255, 255, 0.7);
+    transition: all 0.2s ease;
+    padding: 0.5rem 1rem;
+    border-radius: 0.25rem;
+}
+
+#bg-dashboard-user .nav-link:hover,
+#bg-dashboard-user .nav-link.active {
+    color: #ffffff;
+    background-color: rgba(0, 213, 177, 0.15);
+}
+
+/* Notifications */
+#bg-dashboard-user .notification {
+    background-color: rgba(0, 213, 177, 0.1);
+    border-left: 4px solid #00d5b1;
+    padding: 1rem;
+    margin-bottom: 1rem;
+    border-radius: 0.25rem;
+}
+
+/* For the logo */
+#bg-dashboard-user .logo {
+    font-weight: 700;
+    font-size: 1.5rem;
+}
+
+#bg-dashboard-user .logo .hub {
+    color: #00d5b1;
+}
+
+/* Media queries for responsive design */
+@media (max-width: 768px) {
+    #bg-dashboard-user main {
+        padding: 1rem;
+    }
+    
+    #bg-dashboard-user .dashboard-card {
+        padding: 1rem;
+    }
+    
+    #bg-dashboard-user h1 {
+        font-size: 1.75rem;
+        line-height: 2rem;
+    }
+}
