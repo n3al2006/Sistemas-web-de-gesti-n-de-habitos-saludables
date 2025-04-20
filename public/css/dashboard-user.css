@@ -1,5 +1,5 @@
 .dashboard-background {
-    background-image: url('{{ asset("img/1401.jpg") }}');
+    background-image: url("/img/1401.jpg");
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;

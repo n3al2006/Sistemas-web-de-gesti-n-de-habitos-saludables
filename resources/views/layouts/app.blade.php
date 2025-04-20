@@ -10,9 +10,9 @@
         <!-- Fonts -->
         <link rel="preconnect" href="https://fonts.bunny.net">
         <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
-        <link rel="stylesheet" href="{{ asset('css/dashboard-user.css') }}?v={{ time() }}">
+        <link rel="stylesheet" href="{{ asset('css/dashboard-user.css') }} }}">
         <style>
-            .dashboard-background {
+            /* .dashboard-background {
                 background-image: url('{{ asset("img/1401.jpg") }}');
                 background-size: cover;
                 background-position: center;
@@ -27,7 +27,7 @@
                 right: 0;
                 bottom: 0;
                 background: rgba(15, 23, 42, 0.85);
-            }
+            } */
         </style>
         <!-- Scripts -->
         @vite(['resources/css/app.css', 'resources/js/app.js'])
