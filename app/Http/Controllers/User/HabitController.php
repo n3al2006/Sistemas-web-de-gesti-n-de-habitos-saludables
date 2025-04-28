@@ -32,14 +32,30 @@ class HabitController extends Controller
             'name' => 'required|string|max:255',
             'description' => 'nullable|string',
             'frequency' => 'required|string',
-            'reminder_time' => 'nullable|date_format:H:i'
+            'frequency_type' => 'required|string'
         ]);
-
-        $habit = Habit::create($validated);
-        auth()->user()->habits()->attach($habit->id, ['is_active' => true]);
-
+    
+        // Primero creamos el hábito base
+        $habit = Habit::create([
+            'name' => $validated['name'],
+            'description' => $validated['description'] ?? null,
+            'frequency' => $validated['frequency'],
+            'frequency_type' => $validated['frequency_type']
+        ]);
+    
+        // Luego creamos la relación en user_habits
+        $userHabit = new UserHabit();
+        $userHabit->user_id = Auth::id();
+        $userHabit->habit_id = $habit->id;
+        $userHabit->name = $validated['name'];
+        $userHabit->description = $validated['description'] ?? null;
+        $userHabit->frequency = $validated['frequency'];
+        $userHabit->frequency_type = $validated['frequency_type'];
+        $userHabit->is_active = true;
+        $userHabit->save();
+    
         return redirect()->route('dashboard')
-            ->with('success', 'Habit created successfully.');
+            ->with('success', 'Hábito creado exitosamente');
     }
 
     public function updateProgress(Request $request, Habit $habit)
@@ -81,7 +97,6 @@ class HabitController extends Controller
 
     public function adopt(HabitTemplate $habit)
     {
-        // Verificar si ya existe
         $existingHabit = UserHabit::where('user_id', Auth::id())
             ->where('habit_template_id', $habit->id)
             ->first();
@@ -98,7 +113,7 @@ class HabitController extends Controller
                 'is_active' => true
             ]);
     
-            return redirect()->route('user.habits.index')
+            return redirect()->route('dashboard')
                 ->with('success', 'Hábito adoptado exitosamente');
         }
     

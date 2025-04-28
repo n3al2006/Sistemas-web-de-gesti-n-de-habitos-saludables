@@ -12,8 +12,8 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->text('description')->nullable();
-            $table->string('frequency');
-            $table->time('reminder_time')->nullable();
+            $table->integer('frequency');
+            $table->string('frequency_type'); // Agregamos este campo
             $table->timestamps();
         });
     }

@@ -13,7 +13,7 @@ class Habit extends Model
         'name',
         'description',
         'frequency',
-        'reminder_time'
+        'frequency_type'
     ];
 
     public function users()
