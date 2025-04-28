@@ -4,7 +4,10 @@ namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
 use App\Models\Habit;
+use App\Models\HabitTemplate;
+use App\Models\UserHabit;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class HabitController extends Controller
 {
@@ -63,19 +66,42 @@ class HabitController extends Controller
 
     public function recommended()
     {
-        $recommendedHabits = Habit::whereDoesntHave('users', function($query) {
-            $query->where('user_id', auth()->id());
-        })->take(5)->get();
-    
+        // Modificamos la consulta para obtener todos los hábitos activos
+        $recommendedHabits = HabitTemplate::where('is_active', true)
+            ->whereNotExists(function($query) {
+                $query->select('id')
+                      ->from('user_habits')
+                      ->whereColumn('habit_template_id', 'habit_templates.id')
+                      ->where('user_id', Auth::id());
+            })
+            ->get();
+            
         return view('user.habits.recommended', compact('recommendedHabits'));
     }
 
-    public function adopt(Request $request, Habit $habit)
+    public function adopt(HabitTemplate $habit)
     {
-        $habit = Habit::findOrFail($request->habit_id);
-        auth()->user()->habits()->attach($habit->id, ['is_active' => true]);
+        // Verificar si ya existe
+        $existingHabit = UserHabit::where('user_id', Auth::id())
+            ->where('habit_template_id', $habit->id)
+            ->first();
     
-        return redirect()->route('user.habits.index')
-            ->with('success', 'Habit adopted successfully.');
+        if (!$existingHabit) {
+            UserHabit::create([
+                'user_id' => Auth::id(),
+                'habit_template_id' => $habit->id,
+                'name' => $habit->name,
+                'description' => $habit->description,
+                'category' => $habit->category,
+                'frequency' => $habit->frequency,
+                'frequency_type' => $habit->frequency_type,
+                'is_active' => true
+            ]);
+    
+            return redirect()->route('user.habits.index')
+                ->with('success', 'Hábito adoptado exitosamente');
+        }
+    
+        return back()->with('error', 'Ya has adoptado este hábito');
     }
 }

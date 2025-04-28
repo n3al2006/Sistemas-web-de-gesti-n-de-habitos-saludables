@@ -19,13 +19,14 @@ Route::prefix('admin-panel')->group(function () {
     Route::get('/', function () {
         return redirect()->route('admin.login');
     });
+
     Route::get('/login', [AdminAuthController::class, 'loginForm'])->name('admin.login');
     Route::post('/login', [AdminAuthController::class, 'login']);
     Route::post('/logout', [AdminAuthController::class, 'logout'])->name('admin.logout');
 
     Route::middleware(['auth:admin'])->name('admin.')->group(function () {
         Route::get('/dashboard', [AdminDashboardController::class, 'index'])->name('dashboard');
-        Route::resource('/habits', AdminHabitController::class);
+        Route::resource('/habits', AdminHabitController::class)->names('habits');
         Route::get('/users/progress', [AdminUserController::class, 'progress'])->name('users.progress');
     });
 });
@@ -38,8 +39,7 @@ Route::middleware(['auth'])->group(function () {
 
     Route::prefix('user')->name('user.')->group(function () {
         Route::get('/dashboard', [UserDashboardController::class, 'index'])->name('dashboard');
-        
-        // Habits routes
+
         Route::get('/habits', [UserHabitController::class, 'index'])->name('habits.index');
         Route::get('/habits/create', [UserHabitController::class, 'create'])->name('habits.create');
         Route::post('/habits', [UserHabitController::class, 'store'])->name('habits.store');
@@ -47,10 +47,10 @@ Route::middleware(['auth'])->group(function () {
         Route::post('/habits/adopt/{habit}', [UserHabitController::class, 'adopt'])->name('habits.adopt');
         Route::put('/habits/{habit}', [UserHabitController::class, 'update'])->name('habits.update');
         Route::delete('/habits/{habit}', [UserHabitController::class, 'destroy'])->name('habits.destroy');
-        Route::post('/habits/{habit}/progress', [UserHabitController::class, 'updateProgress'])
-            ->name('habits.progress');
+        Route::post('/habits/{habit}/progress', [UserHabitController::class, 'updateProgress'])->name('habits.progress');
     });
 
+    // Perfil del usuario
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
