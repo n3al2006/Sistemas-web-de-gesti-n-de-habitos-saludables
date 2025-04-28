@@ -1,0 +1,58 @@
+<svg viewBox="0 0 1200 800" xmlns="http://www.w3.org/2000/svg">
+    <defs>
+      <filter id="glow" x="-50%" y="-50%" width="200%" height="200%">
+        <feGaussianBlur stdDeviation="10" result="blur" />
+        <feComposite in="SourceGraphic" in2="blur" operator="over" />
+      </filter>
+    </defs>
+    
+    <!-- Background elements -->
+    <g opacity="0.3" filter="url(#glow)">
+      <!-- Plant-like elements -->
+      <path d="M100,500 C150,450 100,350 150,300 C200,250 300,350 320,250 C340,150 250,100 300,50" 
+            stroke="#00d5b1" 
+            stroke-width="3" 
+            fill="none" 
+            opacity="0.2" />
+            
+      <path d="M400,700 C450,650 400,550 450,500 C500,450 600,550 620,450 C640,350 550,300 600,250" 
+            stroke="#00d5b1" 
+            stroke-width="2" 
+            fill="none" 
+            opacity="0.15" />
+            
+      <path d="M800,600 C850,550 800,450 850,400 C900,350 1000,450 1020,350 C1040,250 950,200 1000,150" 
+            stroke="#00d5b1" 
+            stroke-width="3" 
+            fill="none" 
+            opacity="0.2" />
+    </g>
+    
+    <!-- Bokeh light effect circles -->
+    <g opacity="0.1">
+      <circle cx="200" cy="200" r="80" fill="#ffffff" />
+      <circle cx="800" cy="300" r="120" fill="#ffffff" />
+      <circle cx="400" cy="600" r="100" fill="#ffffff" />
+      <circle cx="1000" cy="500" r="90" fill="#ffffff" />
+      <circle cx="600" cy="200" r="70" fill="#ffffff" />
+      <circle cx="100" cy="400" r="60" fill="#ffffff" />
+      <circle cx="900" cy="700" r="110" fill="#ffffff" />
+      <circle cx="300" cy="100" r="50" fill="#ffffff" />
+      <circle cx="700" cy="500" r="40" fill="#ffffff" />
+      <circle cx="1100" cy="200" r="90" fill="#ffffff" />
+    </g>
+    
+    <!-- Accent elements -->
+    <g opacity="0.05">
+      <circle cx="150" cy="250" r="5" fill="#00f2c9" />
+      <circle cx="650" cy="450" r="8" fill="#00f2c9" />
+      <circle cx="950" cy="350" r="6" fill="#00f2c9" />
+      <circle cx="350" cy="650" r="7" fill="#00f2c9" />
+      <circle cx="850" cy="150" r="4" fill="#00f2c9" />
+      <circle cx="250" cy="550" r="9" fill="#00f2c9" />
+      <circle cx="750" cy="250" r="5" fill="#00f2c9" />
+      <circle cx="450" cy="50" r="7" fill="#00f2c9" />
+      <circle cx="550" cy="750" r="6" fill="#00f2c9" />
+      <circle cx="1050" cy="550" r="8" fill="#00f2c9" />
+    </g>
+  </svg>
