@@ -18,10 +18,6 @@ class UserHabit extends Model
         'is_active'
     ];
 
-    protected $casts = [
-        'is_active' => 'boolean'
-    ];
-
     public function user()
     {
         return $this->belongsTo(User::class);

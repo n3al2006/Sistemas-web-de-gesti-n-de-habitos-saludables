@@ -13,12 +13,20 @@ class HabitController extends Controller
 {
     public function index()
     {
+        // Obtener tanto los hábitos creados como los adoptados
         $habits = auth()->user()->habits()->with('progress')->get();
+        $adoptedHabits = UserHabit::where('user_id', auth()->id())
+            ->where('habit_template_id', '!=', null)
+            ->get();
+        
+        // Combinar los hábitos
+        $allHabits = $habits->concat($adoptedHabits);
+        
         $todayProgress = auth()->user()->progress()
             ->whereDate('date', today())
             ->count();
         
-        return view('user.habits.index', compact('habits', 'todayProgress'));
+        return view('user.dashboard', compact('allHabits', 'todayProgress'));
     }
 
     public function create()
@@ -43,16 +51,16 @@ class HabitController extends Controller
             'frequency_type' => $validated['frequency_type']
         ]);
     
-        // Luego creamos la relación en user_habits
-        $userHabit = new UserHabit();
-        $userHabit->user_id = Auth::id();
-        $userHabit->habit_id = $habit->id;
-        $userHabit->name = $validated['name'];
-        $userHabit->description = $validated['description'] ?? null;
-        $userHabit->frequency = $validated['frequency'];
-        $userHabit->frequency_type = $validated['frequency_type'];
-        $userHabit->is_active = true;
-        $userHabit->save();
+        // Creamos el registro en user_habits usando create en lugar de new
+        UserHabit::create([
+            'user_id' => Auth::id(),
+            'habit_id' => $habit->id,
+            'name' => $validated['name'],
+            'description' => $validated['description'] ?? null,
+            'frequency' => $validated['frequency'],
+            'frequency_type' => $validated['frequency_type'],
+            'is_active' => true
+        ]);
     
         return redirect()->route('dashboard')
             ->with('success', 'Hábito creado exitosamente');
@@ -102,9 +110,18 @@ class HabitController extends Controller
             ->first();
     
         if (!$existingHabit) {
+            // Primero creamos el hábito base
+            $baseHabit = Habit::create([
+                'name' => $habit->name,
+                'description' => $habit->description,
+                'frequency' => $habit->frequency,
+                'frequency_type' => $habit->frequency_type
+            ]);
+    
+            // Luego creamos la relación en user_habits
             UserHabit::create([
                 'user_id' => Auth::id(),
-                'habit_template_id' => $habit->id,
+                'habit_id' => $baseHabit->id,
                 'name' => $habit->name,
                 'description' => $habit->description,
                 'category' => $habit->category,
