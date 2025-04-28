@@ -17,6 +17,9 @@
                 <a href="{{ route('dashboard') }}" class="flex items-center px-4 py-2 bg-gray-700 text-white">
                     <span class="mr-2">📊</span> Hábitos
                 </a>
+                <a href="{{ route('user.habits.recommended') }}" class="flex items-center px-4 py-2 text-gray-300 hover:bg-gray-700">
+                    <span class="mr-2">⭐</span> Recomendados
+                </a>
                 <a href="#" class="flex items-center px-4 py-2 text-gray-300 hover:bg-gray-700">
                     <span class="mr-2">🎯</span> Desafíos
                 </a>

@@ -4,7 +4,10 @@ namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
 use App\Models\Habit;
+use App\Models\HabitTemplate;
+use App\Models\UserHabit;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class HabitController extends Controller
 {
@@ -29,14 +32,30 @@ class HabitController extends Controller
             'name' => 'required|string|max:255',
             'description' => 'nullable|string',
             'frequency' => 'required|string',
-            'reminder_time' => 'nullable|date_format:H:i'
+            'frequency_type' => 'required|string'
         ]);
-
-        $habit = Habit::create($validated);
-        auth()->user()->habits()->attach($habit->id, ['is_active' => true]);
-
+    
+        // Primero creamos el hábito base
+        $habit = Habit::create([
+            'name' => $validated['name'],
+            'description' => $validated['description'] ?? null,
+            'frequency' => $validated['frequency'],
+            'frequency_type' => $validated['frequency_type']
+        ]);
+    
+        // Luego creamos la relación en user_habits
+        $userHabit = new UserHabit();
+        $userHabit->user_id = Auth::id();
+        $userHabit->habit_id = $habit->id;
+        $userHabit->name = $validated['name'];
+        $userHabit->description = $validated['description'] ?? null;
+        $userHabit->frequency = $validated['frequency'];
+        $userHabit->frequency_type = $validated['frequency_type'];
+        $userHabit->is_active = true;
+        $userHabit->save();
+    
         return redirect()->route('dashboard')
-            ->with('success', 'Habit created successfully.');
+            ->with('success', 'Hábito creado exitosamente');
     }
 
     public function updateProgress(Request $request, Habit $habit)
@@ -63,19 +82,41 @@ class HabitController extends Controller
 
     public function recommended()
     {
-        $recommendedHabits = Habit::whereDoesntHave('users', function($query) {
-            $query->where('user_id', auth()->id());
-        })->take(5)->get();
-    
+        // Modificamos la consulta para obtener todos los hábitos activos
+        $recommendedHabits = HabitTemplate::where('is_active', true)
+            ->whereNotExists(function($query) {
+                $query->select('id')
+                      ->from('user_habits')
+                      ->whereColumn('habit_template_id', 'habit_templates.id')
+                      ->where('user_id', Auth::id());
+            })
+            ->get();
+            
         return view('user.habits.recommended', compact('recommendedHabits'));
     }
 
-    public function adopt(Request $request, Habit $habit)
+    public function adopt(HabitTemplate $habit)
     {
-        $habit = Habit::findOrFail($request->habit_id);
-        auth()->user()->habits()->attach($habit->id, ['is_active' => true]);
+        $existingHabit = UserHabit::where('user_id', Auth::id())
+            ->where('habit_template_id', $habit->id)
+            ->first();
     
-        return redirect()->route('user.habits.index')
-            ->with('success', 'Habit adopted successfully.');
+        if (!$existingHabit) {
+            UserHabit::create([
+                'user_id' => Auth::id(),
+                'habit_template_id' => $habit->id,
+                'name' => $habit->name,
+                'description' => $habit->description,
+                'category' => $habit->category,
+                'frequency' => $habit->frequency,
+                'frequency_type' => $habit->frequency_type,
+                'is_active' => true
+            ]);
+    
+            return redirect()->route('dashboard')
+                ->with('success', 'Hábito adoptado exitosamente');
+        }
+    
+        return back()->with('error', 'Ya has adoptado este hábito');
     }
 }
