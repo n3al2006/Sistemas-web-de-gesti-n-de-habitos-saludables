@@ -3,14 +3,14 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Models\Habit;
+use App\Models\HabitTemplate;
 use Illuminate\Http\Request;
 
 class HabitController extends Controller
 {
     public function index()
     {
-        $habits = Habit::withCount('users')->get();
+        $habits = HabitTemplate::all();
         return view('admin.habits.index', compact('habits'));
     }
 
@@ -24,35 +24,39 @@ class HabitController extends Controller
         $validated = $request->validate([
             'name' => 'required|string|max:255',
             'description' => 'nullable|string',
-            'frequency' => 'required|string',
-            'reminder_time' => 'nullable|date_format:H:i'
+            'category' => 'nullable|string|max:255',
+            'frequency' => 'required|integer|min:1',
+            'frequency_type' => 'required|in:daily,weekly,monthly',
+            'is_active' => 'boolean'
         ]);
 
-        Habit::create($validated);
-        return redirect()->route('admin.habits.index')->with('success', 'Habit created successfully');
+        HabitTemplate::create($validated);
+        return redirect()->route('admin.habits.index')->with('success', 'Habit template created successfully');
     }
 
-    public function edit(Habit $habit)
+    public function edit(HabitTemplate $habit)
     {
         return view('admin.habits.edit', compact('habit'));
     }
 
-    public function update(Request $request, Habit $habit)
+    public function update(Request $request, HabitTemplate $habit)
     {
         $validated = $request->validate([
             'name' => 'required|string|max:255',
             'description' => 'nullable|string',
-            'frequency' => 'required|string',
-            'reminder_time' => 'nullable|date_format:H:i'
+            'category' => 'nullable|string|max:255',
+            'frequency' => 'required|integer|min:1',
+            'frequency_type' => 'required|in:daily,weekly,monthly',
+            'is_active' => 'boolean'
         ]);
 
         $habit->update($validated);
-        return redirect()->route('admin.habits.index')->with('success', 'Habit updated successfully');
+        return redirect()->route('admin.habits.index')->with('success', 'Habit template updated successfully');
     }
 
-    public function destroy(Habit $habit)
+    public function destroy(HabitTemplate $habit)
     {
         $habit->delete();
-        return redirect()->route('admin.habits.index')->with('success', 'Habit deleted successfully');
+        return redirect()->route('admin.habits.index')->with('success', 'Habit template deleted successfully');
     }
 }
