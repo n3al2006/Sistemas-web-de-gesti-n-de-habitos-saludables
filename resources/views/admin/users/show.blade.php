@@ -1,64 +1,67 @@
 @extends('admin.layouts.admin')
 
 @section('content')
-<div class="container mx-auto px-4 py-6">
-    <div class="mb-6">
-        <h2 class="text-2xl font-bold">Usuario: {{ $user->name }}</h2>
-        <p class="text-gray-600">{{ $user->email }}</p>
+<section class="manage-habits">
+    <div class="header-section">
+        <h2><i class="fas fa-user"></i> Usuario: {{ $user->name }}</h2>
+        <p class="user-email">{{ $user->email }}</p>
     </div>
 
-    <div class="bg-white rounded-lg shadow p-6 mb-6">
-        <h3 class="text-xl font-semibold mb-4">Resumen de Progreso</h3>
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-            <div class="bg-gray-50 p-4 rounded">
-                <p class="text-gray-600">Hábitos Totales</p>
-                <p class="text-2xl font-bold">{{ $allHabits->count() }}</p>
-            </div>
-            <div class="bg-gray-50 p-4 rounded">
-                <p class="text-gray-600">Progreso Mensual</p>
-                <p class="text-2xl font-bold">{{ $monthlyProgress }}</p>
-            </div>
+    <div class="stats-bar">
+        <div class="stat">
+            <h3>{{ $allHabits->count() }}</h3>
+            <p>Hábitos Totales</p>
+        </div>
+        <div class="stat">
+            <h3>{{ $monthlyProgress }}</h3>
+            <p>Progreso Mensual</p>
+        </div>
+        <div class="stat">
+            <h3>{{ $user->progress->count() }}</h3>
+            <p>Racha Actual</p>
         </div>
     </div>
 
-    <div class="bg-white rounded-lg shadow overflow-hidden">
-        <h3 class="text-xl font-semibold p-6 bg-gray-50">Hábitos del Usuario</h3>
-        <table class="min-w-full">
-            <thead class="bg-gray-50">
+    <div class="user-habits-section">
+        <div class="section-header">
+            <h3><i class="fas fa-list-check"></i> Hábitos del Usuario</h3>
+        </div>
+
+        <table class="habits-table">
+            <thead>
                 <tr>
-                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Nombre</th>
-                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Tipo</th>
-                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Frecuencia</th>
-                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Estado</th>
-                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase">Progreso</th>
+                    <th>NOMBRE</th>
+                    <th>TIPO</th>
+                    <th>FRECUENCIA</th>
+                    <th>ESTADO</th>
+                    <th>PROGRESO</th>
                 </tr>
             </thead>
-            <tbody class="divide-y divide-gray-200">
+            <tbody>
                 @foreach($allHabits as $habit)
                 <tr>
-                    <td class="px-6 py-4">{{ $habit->name }}</td>
-                    <td class="px-6 py-4">
-                        {{ $habit->habit_template_id ? 'Adoptado' : 'Personal' }}
-                    </td>
-                    <td class="px-6 py-4">
-                        {{ $habit->frequency }} veces {{ $habit->frequency_type }}
-                    </td>
-                    <td class="px-6 py-4">
-                        <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full {{ $habit->is_active ? 'bg-green-100 text-green-800' : 'bg-red-100 text-red-800' }}">
-                            {{ $habit->is_active ? 'Activo' : 'Inactivo' }}
+                    <td>{{ $habit->name }}</td>
+                    <td>
+                        <span class="tag {{ $habit->habit_template_id ? 'adopted' : 'personal' }}">
+                            {{ $habit->habit_template_id ? 'Adoptado' : 'Personal' }}
                         </span>
                     </td>
-                    <td class="px-6 py-4">
-                        @if($habit->progress)
-                            {{ $habit->progress->where('completed', true)->count() }} completados
-                        @else
-                            0 completados
-                        @endif
+                    <td>{{ $habit->frequency }} veces {{ $habit->frequency_type }}</td>
+                    <td>
+                        <span class="status {{ $habit->is_active ? 'active' : 'inactive' }}">
+                            {{ $habit->is_active ? 'ACTIVO' : 'INACTIVO' }}
+                        </span>
+                    </td>
+                    <td>
+                        <span class="progress-count">
+                            <i class="fas fa-check-circle"></i>
+                            {{ $habit->progress ? $habit->progress->where('completed', true)->count() : 0 }} completados
+                        </span>
                     </td>
                 </tr>
                 @endforeach
             </tbody>
         </table>
     </div>
-</div>
+</section>
 @endsection

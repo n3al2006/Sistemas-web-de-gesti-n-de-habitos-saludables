@@ -1,20 +1,24 @@
 @extends('admin.layouts.admin')
 
 @section('content')
-<div class="bg-white rounded-lg shadow-lg p-6">
-    <h2 class="text-2xl font-bold mb-6">Edit Habit</h2>
+<section class="manage-habits">
+    <div class="header-section">
+        <h2><i class="fas fa-edit"></i> Editar Hábito</h2>
+    </div>
 
-    <form action="{{ route('admin.habits.update', $habit) }}" method="POST">
+    <form action="{{ route('admin.habits.update', $habit) }}" method="POST" class="habit-form">
         @csrf
         @method('PUT')
         @include('admin.habits.form')
         
-        <div class="mt-6">
-            <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600">
-                Update Habit
+        <div class="form-actions">
+            <button type="submit" class="create-button">
+                <i class="fas fa-save"></i> Actualizar Hábito
             </button>
-            <a href="{{ route('admin.habits.index') }}" class="ml-2 text-gray-600 hover:text-gray-800">Cancel</a>
+            <a href="{{ route('admin.habits.index') }}" class="cancel-button">
+                <i class="fas fa-times"></i> Cancelar
+            </a>
         </div>
     </form>
-</div>
+</section>
 @endsection
