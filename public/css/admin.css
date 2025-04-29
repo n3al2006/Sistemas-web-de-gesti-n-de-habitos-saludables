@@ -1,0 +1,608 @@
+/* Reset básico */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #1a1c23;
+    color: #fff;
+}
+
+/* Header */
+.header {
+    background-color: #5B45E0;
+    padding: 1rem 2rem;
+    position: fixed;
+    width: 100%;
+    top: 0;
+    z-index: 1000;
+}
+
+.nav-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.nav-container h1 {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 1.5rem;
+    color: white;
+}
+
+.nav-links {
+    display: flex;
+    gap: 2rem;
+    align-items: center;
+}
+
+.nav-link {
+    color: white;
+    text-decoration: none;
+    font-weight: 500;
+    transition: opacity 0.2s;
+}
+
+.nav-link:hover {
+    opacity: 0.8;
+}
+
+.logout {
+    color: #FF6B6B;
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-weight: 500;
+}
+
+/* Main Content */
+.main {
+    padding-top: 5rem;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 6rem 2rem 2rem;
+}
+
+/* Alerts */
+.alert {
+    padding: 1rem;
+    border-radius: 0.5rem;
+    margin-bottom: 1rem;
+}
+
+.alert.success {
+    background-color: rgba(16, 185, 129, 0.1);
+    border: 1px solid #10B981;
+    color: #10B981;
+}
+
+.alert.error {
+    background-color: rgba(239, 68, 68, 0.1);
+    border: 1px solid #EF4444;
+    color: #EF4444;
+}
+
+/* Responsive Menu Toggle */
+.menu-toggle {
+    display: none;
+    flex-direction: column;
+    gap: 0.3rem;
+    cursor: pointer;
+}
+
+.menu-toggle span {
+    width: 25px;
+    height: 2px;
+    background-color: white;
+    transition: all 0.3s;
+}
+
+@media (max-width: 768px) {
+    .menu-toggle {
+        display: flex;
+    }
+
+    .nav-links {
+        display: none;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        background-color: #5B45E0;
+        flex-direction: column;
+        padding: 1rem;
+    }
+
+    .nav-links.open {
+        display: flex;
+    }
+}
+
+/* Manage Habits Section */
+.manage-habits {
+    padding: 2rem;
+    color: #fff;
+}
+
+.header-section {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 2rem;
+}
+
+.header-section h2 {
+    font-size: 1.5rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.create-button {
+    background-color: #5B45E0;
+    color: white;
+    padding: 0.75rem 1.5rem;
+    border-radius: 0.5rem;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+/* Stats Bar */
+.stats-bar {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1rem;
+    margin-bottom: 2rem;
+}
+
+.stat {
+    background-color: #1E2028;
+    padding: 1.5rem;
+    border-radius: 0.5rem;
+    text-align: center;
+}
+
+.stat h3 {
+    font-size: 2rem;
+    color: #5B45E0;
+    margin-bottom: 0.5rem;
+}
+
+.stat p {
+    color: #8A8F98;
+}
+
+/* Controls */
+.controls {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 2rem;
+}
+
+.search-input, .filter-select {
+    background-color: #1E2028;
+    border: 1px solid #2A2D35;
+    color: white;
+    padding: 0.75rem 1rem;
+    border-radius: 0.5rem;
+    width: 250px;
+}
+
+/* Table Styles */
+.habits-table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0 0.5rem;
+}
+
+.habits-table th {
+    color: #8A8F98;
+    text-align: left;
+    padding: 1rem;
+    font-weight: 500;
+}
+
+.habits-table tr {
+    background-color: #1E2028;
+}
+
+.habits-table td {
+    padding: 1rem;
+    color: #fff;
+}
+
+/* Tags and Status */
+.tag {
+    padding: 0.25rem 0.75rem;
+    border-radius: 1rem;
+    font-size: 0.875rem;
+}
+
+.tag.health { background-color: #10B981; }
+.tag.growth { background-color: #8B5CF6; }
+.tag.fitness { background-color: #8B4513; }
+.tag.mental { background-color: #0EA5E9; }
+
+.status {
+    padding: 0.25rem 0.75rem;
+    border-radius: 1rem;
+    font-size: 0.875rem;
+}
+
+.status.active { background-color: #059669; }
+.status.inactive { background-color: #DC2626; }
+.status.pending { background-color: #D97706; }
+
+/* Actions */
+.actions {
+    display: flex;
+    gap: 1rem;
+}
+
+.edit, .delete {
+    background: none;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 0.25rem;
+}
+
+.edit {
+    color: #5B45E0;
+}
+
+.delete {
+    color: #DC2626;
+}
+
+/* Pagination */
+.pagination {
+    display: flex;
+    justify-content: center;
+    gap: 0.5rem;
+    margin-top: 2rem;
+}
+
+.page-btn {
+    background-color: #1E2028;
+    border: none;
+    color: white;
+    padding: 0.5rem 1rem;
+    border-radius: 0.25rem;
+    cursor: pointer;
+}
+
+.page-btn.active {
+    background-color: #5B45E0;
+}
+
+/* Formulario de hábitos */
+.habit-form {
+    background-color: #1e2029;
+    padding: 2rem;
+    border-radius: 1rem;
+    color: #fff;
+}
+
+.form-group {
+    margin-bottom: 1.5rem;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 0.5rem;
+    color: #8A8F98;
+}
+
+.form-group input[type="text"],
+.form-group input[type="number"],
+.form-group textarea,
+.form-group select {
+    width: 100%;
+    padding: 0.75rem;
+    background-color: #24273a;
+    border: 1px solid #2f3241;
+    border-radius: 0.5rem;
+    color: #fff;
+    font-size: 1rem;
+}
+
+.form-group textarea {
+    min-height: 100px;
+    resize: vertical;
+}
+
+.form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+}
+
+.checkbox {
+    display: flex;
+    align-items: center;
+}
+
+.checkbox label {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    cursor: pointer;
+}
+
+.checkbox input[type="checkbox"] {
+    width: 1.2rem;
+    height: 1.2rem;
+    background-color: #24273a;
+    border: 1px solid #2f3241;
+    border-radius: 0.25rem;
+    cursor: pointer;
+}
+
+.checkbox span {
+    color: #fff;
+}
+
+/* Focus states */
+.form-group input:focus,
+.form-group textarea:focus,
+.form-group select:focus {
+    outline: none;
+    border-color: #5B45E0;
+    box-shadow: 0 0 0 2px rgba(91, 69, 224, 0.2);
+}
+
+/* Form Actions */
+.form-actions {
+    margin-top: 2rem;
+    display: flex;
+    gap: 1rem;
+}
+
+.create-button {
+    background-color: #5B45E0;
+    color: white;
+    padding: 0.75rem 1.5rem;
+    border-radius: 0.5rem;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    text-decoration: none;
+}
+
+.cancel-button {
+    background-color: #24273a;
+    color: #FF6B6B;
+    padding: 0.75rem 1.5rem;
+    border-radius: 0.5rem;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    text-decoration: none;
+}
+
+.create-button:hover {
+    background-color: #4B35D0;
+}
+
+.cancel-button:hover {
+    background-color: #2f3241;
+}
+
+/* Top Users Section */
+.top-users-section {
+    margin-bottom: 2rem;
+}
+
+.top-users-section h3 {
+    color: #fff;
+    font-size: 1.25rem;
+    margin-bottom: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.top-users-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1rem;
+}
+
+.top-user-card {
+    background-color: #24273a;
+    padding: 1.5rem;
+    border-radius: 0.5rem;
+    position: relative;
+}
+
+.user-rank {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 0.5rem;
+}
+
+.rank-icon {
+    font-size: 1.5rem;
+}
+
+.rank-number {
+    color: #8A8F98;
+    font-size: 0.875rem;
+}
+
+.user-name {
+    color: #fff;
+    font-weight: 500;
+    margin-bottom: 0.5rem;
+}
+
+.user-stats {
+    color: #8A8F98;
+    font-size: 0.875rem;
+}
+
+/* Streak Styles */
+.streak {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.25rem 0.75rem;
+    border-radius: 1rem;
+    background-color: #24273a;
+    color: #8A8F98;
+}
+
+.streak.high-streak {
+    color: #10B981;
+}
+
+.streak i {
+    color: #FF6B6B;
+}
+
+/* View Details Button */
+.view-details {
+    color: #5B45E0;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.view-details:hover {
+    color: #4B35D0;
+}
+
+/* User Details Styles */
+.user-email {
+    color: #8A8F98;
+    font-size: 0.9rem;
+    margin-top: 0.5rem;
+}
+
+.user-habits-section {
+    margin-top: 2rem;
+}
+
+.section-header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 1.5rem;
+}
+
+.section-header h3 {
+    color: #fff;
+    font-size: 1.25rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+/* Tags for habit types */
+.tag.adopted {
+    background-color: #5B45E0;
+}
+
+.tag.personal {
+    background-color: #2563EB;
+}
+
+/* Progress count */
+.progress-count {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: #8A8F98;
+}
+
+.progress-count i {
+    color: #10B981;
+}
+
+/* Dashboard Grid */
+.dashboard-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 1.5rem;
+    margin-top: 2rem;
+}
+
+.dashboard-card {
+    background-color: #24273a;
+    border-radius: 1rem;
+    padding: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    transition: transform 0.2s ease;
+}
+
+.dashboard-card:hover {
+    transform: translateY(-5px);
+}
+
+.card-icon {
+    width: 50px;
+    height: 50px;
+    background-color: #5B45E0;
+    border-radius: 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 1.5rem;
+}
+
+.card-icon i {
+    font-size: 1.5rem;
+    color: white;
+}
+
+.card-content h3 {
+    color: white;
+    font-size: 1.25rem;
+    margin-bottom: 0.5rem;
+}
+
+.card-content p {
+    color: #8A8F98;
+    margin-bottom: 1.5rem;
+    line-height: 1.5;
+}
+
+.card-link {
+    color: #5B45E0;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-weight: 500;
+    margin-top: auto;
+}
+
+.card-link:hover {
+    color: #4B35D0;
+}
+
+.card-link i {
+    transition: transform 0.2s ease;
+}
+
+.card-link:hover i {
+    transform: translateX(5px);
+}

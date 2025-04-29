@@ -31,7 +31,7 @@ class HabitController extends Controller
         ]);
 
         HabitTemplate::create($validated);
-        return redirect()->route('admin.habits.index')->with('success', 'Habit template created successfully');
+        return redirect()->route('admin.habits.index')->with('success', 'Habito creado correctamente');
     }
 
     public function edit(HabitTemplate $habit)
@@ -51,12 +51,12 @@ class HabitController extends Controller
         ]);
 
         $habit->update($validated);
-        return redirect()->route('admin.habits.index')->with('success', 'Habit template updated successfully');
+        return redirect()->route('admin.habits.index')->with('success', 'Habito actualizado correctamente');
     }
 
     public function destroy(HabitTemplate $habit)
     {
         $habit->delete();
-        return redirect()->route('admin.habits.index')->with('success', 'Habit template deleted successfully');
+        return redirect()->route('admin.habits.index')->with('success', 'Habito eliminado correctamente');
     }
 }

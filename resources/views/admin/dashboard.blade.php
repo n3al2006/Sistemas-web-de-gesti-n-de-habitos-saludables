@@ -1,32 +1,50 @@
 @extends('admin.layouts.admin')
 
 @section('content')
-<div class="bg-white rounded-lg shadow-lg p-6">
-    <h2 class="text-2xl font-bold mb-6">Admin Dashboard</h2>
-    
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-        <div class="bg-blue-100 p-6 rounded-lg">
-            <h3 class="text-lg font-semibold mb-2">Habit Templates</h3>
-            <p class="mb-4">Manage habit templates for users</p>
-            <a href="{{ route('admin.habits.index') }}" class="text-blue-600 hover:text-blue-800">
-                Manage Templates →
-            </a>
-        </div>
-        
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-            <!-- Existing Habit Templates card -->
-            
-            <!-- New User Management card -->
-            <div class="bg-white rounded-lg shadow p-6">
-                <h3 class="text-xl font-bold mb-4">Gestión de Usuarios</h3>
-                <p class="text-gray-600 mb-4">Administra los usuarios y monitorea su progreso</p>
-                <a href="{{ route('admin.users.index') }}" class="text-blue-600 hover:text-blue-800">
-                    Gestionar Usuarios →
+<section class="manage-habits">
+    <div class="header-section">
+        <h2><i class="fas fa-chart-line"></i> Panel de Administración</h2>
+    </div>
+
+    <div class="dashboard-grid">
+        <div class="dashboard-card">
+            <div class="card-icon">
+                <i class="fas fa-list-check"></i>
+            </div>
+            <div class="card-content">
+                <h3>Plantillas de Hábitos</h3>
+                <p>Administra las plantillas de hábitos para usuarios</p>
+                <a href="{{ route('admin.habits.index') }}" class="card-link">
+                    Gestionar Habitos <i class="fas fa-arrow-right"></i>
                 </a>
             </div>
         </div>
-        
-        <!-- Add more dashboard cards here as needed -->
+
+        <div class="dashboard-card">
+            <div class="card-icon">
+                <i class="fas fa-users"></i>
+            </div>
+            <div class="card-content">
+                <h3>Gestión de Usuarios</h3>
+                <p>Administra los usuarios y monitorea su progreso</p>
+                <a href="{{ route('admin.users.index') }}" class="card-link">
+                    Gestionar Usuarios <i class="fas fa-arrow-right"></i>
+                </a>
+            </div>
+        </div>
+
+        <div class="dashboard-card">
+            <div class="card-icon">
+                <i class="fas fa-chart-pie"></i>
+            </div>
+            <div class="card-content">
+                <h3>Estadísticas</h3>
+                <p>Ver estadísticas y reportes del sistema</p>
+                <a href="#" class="card-link">
+                    Ver Reportes <i class="fas fa-arrow-right"></i>
+                </a>
+            </div>
+        </div>
     </div>
-</div>
+</section>
 @endsection
