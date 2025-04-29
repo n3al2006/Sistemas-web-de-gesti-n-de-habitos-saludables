@@ -4,7 +4,6 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Models\Admin;
 use Illuminate\Support\Facades\Auth;
 
 class AdminAuthController extends Controller
@@ -16,23 +15,30 @@ class AdminAuthController extends Controller
 
     public function login(Request $request)
     {
-        $admin = Admin::where('username', $request->username)
-                     ->where('password', $request->password)
-                     ->first();
+        $credentials = $request->validate([
+            'email' => 'required|email',
+            'password' => 'required'
+        ]);
 
-        if ($admin) {
-            Auth::guard('admin')->login($admin);
-            return redirect()->route('admin.dashboard');
+        if (Auth::attempt($credentials)) {
+            $user = Auth::user();
+            if ($user->rol_id === 1) {
+                $request->session()->regenerate();
+                return redirect()->route('admin.dashboard');
+            }
+            Auth::logout();
         }
 
         return back()->withErrors([
-            'username' => 'Credenciales incorrectas',
+            'email' => 'Las credenciales proporcionadas no son válidas.',
         ]);
     }
 
-    public function logout()
+    public function logout(Request $request)
     {
-        Auth::guard('admin')->logout();
-        return redirect('/');
+        Auth::logout();
+        $request->session()->invalidate();
+        $request->session()->regenerateToken();
+        return redirect()->route('admin.login');
     }
 }

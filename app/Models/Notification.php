@@ -4,19 +4,15 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class UserHabit extends Model
+class Notification extends Model
 {
     protected $fillable = [
         'user_id',
         'habit_id',
-        'habit_template_id',
-        'name',
-        'description',
-        'category',
-        'frequency',
-        'frequency_type',
+        'title',
+        'message',
         'reminder_time',
-        'is_active'
+        'is_read'
     ];
 
     public function user()
@@ -27,10 +23,5 @@ class UserHabit extends Model
     public function habit()
     {
         return $this->belongsTo(Habit::class);
-    }
-
-    public function template()
-    {
-        return $this->belongsTo(HabitTemplate::class, 'habit_template_id');
     }
 }

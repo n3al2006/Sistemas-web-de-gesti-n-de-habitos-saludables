@@ -40,7 +40,8 @@ class HabitController extends Controller
             'name' => 'required|string|max:255',
             'description' => 'nullable|string',
             'frequency' => 'required|string',
-            'frequency_type' => 'required|string'
+            'frequency_type' => 'required|string',
+            'reminder_time' => 'nullable|date_format:H:i'
         ]);
     
         // Primero creamos el hábito base
@@ -59,6 +60,7 @@ class HabitController extends Controller
             'description' => $validated['description'] ?? null,
             'frequency' => $validated['frequency'],
             'frequency_type' => $validated['frequency_type'],
+            'reminder_time' => $validated['reminder_time'],
             'is_active' => true
         ]);
     

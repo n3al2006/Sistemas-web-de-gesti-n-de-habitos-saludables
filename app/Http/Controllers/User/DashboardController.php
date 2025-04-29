@@ -6,27 +6,43 @@ use App\Http\Controllers\Controller;
 use App\Models\Habit;
 use App\Models\HabitProgress;
 use Carbon\Carbon;
+use App\Models\Notification;
 
 class DashboardController extends Controller
 {
     public function index()
     {
-        $today = Carbon::today();
-        
-        $habits = auth()->user()->habits()
-            ->with(['progress' => function($query) use ($today) {
-                $query->whereDate('date', $today);
-            }])
-            ->get()
-            ->map(function($habit) {
-                $habit->isCompletedToday = $habit->progress->isNotEmpty();
-                return $habit;
-            });
+        $habits = auth()->user()->habits()->with('progress')->get();
+        $notifications = Notification::where('user_id', auth()->id())
+            ->where('is_read', false)
+            ->orderBy('created_at', 'desc')
+            ->get();
     
-        // Obtener contadores
-        $completedToday = auth()->user()->getCompletedHabitsToday();
-        $streakCount = auth()->user()->calculateStreak();
+        // Calcular la racha (streak)
+        $streakCount = 0;
+        $currentDate = Carbon::now()->startOfDay();
+        $checkDate = clone $currentDate;
     
-        return view('user.dashboard', compact('habits', 'completedToday', 'streakCount'));
+        while (true) {
+            $hasProgress = HabitProgress::where('user_id', auth()->id())
+                ->whereDate('date', $checkDate)
+                ->where('completed', true)
+                ->exists();
+    
+            if (!$hasProgress) {
+                break;
+            }
+    
+            $streakCount++;
+            $checkDate->subDay();
+        }
+    
+        // Calcular hábitos completados hoy
+        $completedToday = HabitProgress::where('user_id', auth()->id())
+            ->whereDate('date', today())
+            ->where('completed', true)
+            ->count();
+    
+        return view('user.dashboard', compact('habits', 'notifications', 'streakCount', 'completedToday'));
     }
 }

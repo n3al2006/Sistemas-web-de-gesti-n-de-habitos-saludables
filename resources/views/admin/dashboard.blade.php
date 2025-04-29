@@ -13,6 +13,19 @@
             </a>
         </div>
         
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <!-- Existing Habit Templates card -->
+            
+            <!-- New User Management card -->
+            <div class="bg-white rounded-lg shadow p-6">
+                <h3 class="text-xl font-bold mb-4">Gestión de Usuarios</h3>
+                <p class="text-gray-600 mb-4">Administra los usuarios y monitorea su progreso</p>
+                <a href="{{ route('admin.users.index') }}" class="text-blue-600 hover:text-blue-800">
+                    Gestionar Usuarios →
+                </a>
+            </div>
+        </div>
+        
         <!-- Add more dashboard cards here as needed -->
     </div>
 </div>

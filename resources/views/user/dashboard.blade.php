@@ -51,6 +51,34 @@
         <!-- Main Content -->
         <div class="flex-1">
             <div class="p-8">
+                <!-- Add notifications section here, at the top of main content -->
+                @if($notifications->count() > 0)
+                    <div class="mb-6">
+                        <div class="bg-white rounded-lg shadow-lg border-l-4 border-emerald-500">
+                            <div class="p-4">
+                                <h3 class="text-lg font-semibold mb-2">📬 Notificaciones</h3>
+                                <div class="space-y-3">
+                                    @foreach($notifications as $notification)
+                                        <div class="flex justify-between items-center border-b last:border-0 pb-2">
+                                            <div>
+                                                <h4 class="font-bold">{{ $notification->title }}</h4>
+                                                <p class="text-gray-600">{{ $notification->message }}</p>
+                                                <p class="text-sm text-gray-500">{{ $notification->created_at->diffForHumans() }}</p>
+                                            </div>
+                                            <form action="{{ route('notifications.mark-as-read', $notification) }}" method="POST">
+                                                @csrf
+                                                <button type="submit" class="text-sm text-emerald-600 hover:text-emerald-800">
+                                                    Marcar como leída
+                                                </button>
+                                            </form>
+                                        </div>
+                                    @endforeach
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                @endif
+
                 <div class="mb-6">
                     <input type="text" placeholder="Buscar hábitos, desafíos o recetas..." 
                            class="w-full px-4 py-2 rounded-lg border shadow-sm">
@@ -215,5 +243,30 @@
             </div>
         </div>
     </div>
+    <!-- Después de la sección de hábitos -->
+    @if($notifications->count() > 0)
+        <div class="mt-6">
+            <h3 class="text-lg font-semibold mb-4">Recordatorios</h3>
+            <div class="space-y-4">
+                @foreach($notifications as $notification)
+                    <div class="bg-white p-4 rounded-lg shadow border-l-4 border-emerald-500">
+                        <div class="flex justify-between items-start">
+                            <div>
+                                <h4 class="font-bold">{{ $notification->title }}</h4>
+                                <p class="text-gray-600">{{ $notification->message }}</p>
+                                <p class="text-sm text-gray-500">{{ $notification->created_at->diffForHumans() }}</p>
+                            </div>
+                            <form action="{{ route('notifications.mark-as-read', $notification) }}" method="POST">
+                                @csrf
+                                <button type="submit" class="text-sm text-emerald-600 hover:text-emerald-800">
+                                    Marcar como leída
+                                </button>
+                            </form>
+                        </div>
+                    </div>
+                @endforeach
+            </div>
+        </div>
+    @endif
 </body>
 </html>

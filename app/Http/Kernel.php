@@ -57,5 +57,7 @@ class Kernel extends HttpKernel
     {
         $schedule->command('habits:send-reminders')->hourly();
         $schedule->command('achievements:check')->daily();
+        $schedule->command('habits:check-reminders')->everyMinute();
     }
+
 }
