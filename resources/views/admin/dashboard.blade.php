@@ -37,13 +37,6 @@
             <div class="card-icon">
                 <i class="fas fa-chart-pie"></i>
             </div>
-            <div class="card-content">
-                <h3>Estadísticas</h3>
-                <p>Ver estadísticas y reportes del sistema</p>
-                <a href="#" class="card-link">
-                    Ver Reportes <i class="fas fa-arrow-right"></i>
-                </a>
-            </div>
         </div>
     </div>
 </section>
