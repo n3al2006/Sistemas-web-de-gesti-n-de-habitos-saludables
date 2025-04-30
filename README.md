@@ -1,6 +1,6 @@
 # Instalación del proyecto en tu máquina local
 
-## 1. Clonar el proyecto
+## 1. Clonar o extraer el proyecto
 
 Abre tu terminal y ejecuta:
 
