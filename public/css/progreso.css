@@ -1,0 +1,209 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap');
+
+:root {
+    --primary-color: #00f7ff;
+    --accent-color: #8079b1;
+    --bg-color: #1a1a1a;
+    --text-color: #f0f0f0;
+    --card-bg: rgba(35, 35, 35, 0.95);
+    --hover-bg: #2d2d2d;
+    --shadow-color: rgba(0, 0, 0, 0.7);
+    --btn-hover: #f39c12;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    font-family: 'Inter', sans-serif;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+.header {
+    background: var(--card-bg);
+    padding: 20px 40px;
+    box-shadow: 0 4px 8px var(--shadow-color);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.header h1 {
+    font-size: 2em;
+    color: var(--primary-color);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.header nav a {
+    color: var(--text-color);
+    text-decoration: none;
+    margin-left: 20px;
+    font-weight: 600;
+    transition: color 0.3s;
+}
+
+.header nav a:hover {
+    color: var(--primary-color);
+}
+
+
+/* Main */
+.progress-section {
+    margin-top: 30px;
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+    animation: fadeIn 1.5s ease forwards;
+}
+
+/* Progreso */
+.progress-summary {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 25px;
+}
+
+.progress-card {
+    background:#1B1B1B;
+    border: 1px solid var(--hover-bg);
+    padding: 30px 40px;
+    border-radius: 16px;
+    box-shadow: 0 8px 24px var(--shadow-color);
+    text-align: center;
+    flex: 1;
+    min-width: 250px;
+    transition: 0.3s ease;
+    cursor: pointer;
+}
+
+.progress-card:hover {
+    background: var(--hover-bg);
+    transform: translateY(-8px);
+    box-shadow: 0 12px 30px var(--shadow-color);
+}
+
+.icon {
+    font-size: 3rem;
+    margin-bottom: 15px;
+}
+
+.progress-card h2 {
+    font-size: 1.5rem;
+    margin-bottom: 8px;
+    color: var(--accent-color);
+}
+
+.progress-card p {
+    font-size: 1rem;
+    opacity: 0.8;
+}
+
+/* Barra de Progreso */
+.bar-progress-section {
+    background: #1B1B1B;
+    padding: 30px;
+    border-radius: 16px;
+    box-shadow: 0 8px 24px var(--shadow-color);
+}
+
+.section-title {
+    font-size: 1.6rem;
+    color: var(--primary-color);
+    margin-bottom: 25px;
+}
+
+.bar-group {
+    margin-bottom: 25px;
+}
+
+.bar-group span {
+    display: block;
+    margin-bottom: 10px;
+    color: var(--accent-color);
+    font-weight: 600;
+}
+
+.bar {
+    background: var(--hover-bg);
+    border-radius: 10px;
+    overflow: hidden;
+    height: 18px;
+}
+
+.bar-fill {
+    background: linear-gradient(90deg, var(--primary-color), var(--accent-color));
+    height: 100%;
+    width: 0;
+    border-radius: 10px;
+    animation: fillBar 2s ease forwards;
+}
+
+.bar-fill::after {
+    content: "";
+    display: block;
+    width: var(--progress);
+}
+
+/* Animations */
+@keyframes fadeIn {
+    0% {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes fadeInDown {
+    0% {
+        opacity: 0;
+        transform: translateY(-30px);
+    }
+
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes fillBar {
+    to {
+        width: var(--progress);
+    }
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .progress-summary {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .progress-card {
+        width: 100%;
+        max-width: 350px;
+    }
+
+    .header {
+        flex-direction: column;
+        gap: 15px;
+    }
+
+    .logo {
+        font-size: 1.6rem;
+    }
+}

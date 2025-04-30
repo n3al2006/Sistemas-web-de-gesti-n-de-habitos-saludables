@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\HomeUserController;
+use App\Http\Controllers\DesafioController;
 use App\Http\Controllers\Admin\DashboardController as AdminDashboardController;
 use App\Http\Controllers\Admin\HabitController as AdminHabitController;
 use App\Http\Controllers\Admin\UserController as AdminUserController;
@@ -50,8 +51,16 @@ Route::middleware(['auth'])->group(function () {
         Route::post('/habits/adopt/{habit}', [UserHabitController::class, 'adopt'])->name('habits.adopt');
         Route::put('/habits/{habit}', [UserHabitController::class, 'update'])->name('habits.update');
         Route::delete('/habits/{habit}', [UserHabitController::class, 'destroy'])->name('habits.destroy');
+        
         Route::post('/habits/{habit}/progress', [UserHabitController::class, 'updateProgress'])->name('habits.progress');
+        
+        
+
     });
+    Route::get('/habits/progress', [UserHabitController::class, 'showProgress'])->name('habits.showProgress');
+    Route::get('/habits/challenge', [DesafioController::class, 'index'])->name('habits.challenge.index');
+    Route::get('/habits/recetas', [DesafioController::class, 'indexRece'])->name('habits.indexRece');
+    Route::get('/habits/recetas/up', [DesafioController::class, 'indexReceUp'])->name('habits.indexReceUp');
 
     // Perfil del usuario
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');

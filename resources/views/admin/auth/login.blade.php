@@ -24,7 +24,7 @@
                 @endif
 
                 <div>
-                    <label class="block text-gray-300 mb-2" for="username">Username</label>
+                    <label class="block text-gray-300 mb-2" for="username">Usuario</label>
                     <input type="text" 
                            name="username" 
                            id="username" 
@@ -33,7 +33,7 @@
                 </div>
 
                 <div>
-                    <label class="block text-gray-300 mb-2" for="password">Password</label>
+                    <label class="block text-gray-300 mb-2" for="password">Contraseña</label>
                     <input type="password" 
                            name="password" 
                            id="password" 
@@ -46,7 +46,7 @@
                            name="remember" 
                            id="remember" 
                            class="rounded bg-gray-700 border-gray-600 text-blue-500 focus:ring-blue-500">
-                    <label class="ml-2 text-gray-300" for="remember">Remember me</label>
+                    <label class="ml-2 text-gray-300" for="remember">Recordarme</label>
                 </div>
 
                 <button type="submit" 
