@@ -606,3 +606,14 @@ body {
 .card-link:hover i {
     transform: translateX(5px);
 }
+
+.medal {
+    font-size: 24px;
+    margin-right: 8px;
+}
+
+.user-rank {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}

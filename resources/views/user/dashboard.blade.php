@@ -172,10 +172,10 @@
                     button.disabled = true;
                     button.textContent = '✓ Completado';
                     
-                    // Actualizar contador
-                    const completedCount = document.querySelector('.stat h3');
-                    const currentCount = parseInt(completedCount.textContent) + 1;
-                    completedCount.textContent = `${currentCount} hábitos completados`;
+                    // Actualizar el contador correcto de hábitos completados
+                    const habitsCompletedCounter = document.querySelector('.stat:nth-child(2) h3');
+                    const currentCompleted = parseInt(habitsCompletedCounter.textContent);
+                    habitsCompletedCounter.textContent = `${currentCompleted + 1} hábitos completados`;
                 }
             })
             .catch(error => {
