@@ -1,44 +1,44 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container mx-auto px-4 py-6">
-    <h2 class="text-2xl font-bold mb-6">Crear Nuevo Hábito</h2>
+<div class="habit-form-container">
+    <h2 class="habit-form-title">Crear Nuevo Hábito</h2>
 
-    <form action="{{ route('user.habits.store') }}" method="POST" class="max-w-lg">
+    <form action="{{ route('user.habits.store') }}" method="POST">
         @csrf
-        <div class="mb-4">
-            <label class="block text-gray-700 text-sm font-bold mb-2" for="name">
+        <div class="form-group">
+            <label class="form-label" for="name">
                 Nombre del Hábito
             </label>
             <input type="text" name="name" id="name" 
-                   class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                   class="form-input"
                    required>
         </div>
 
-        <div class="mb-4">
-            <label class="block text-gray-700 text-sm font-bold mb-2" for="description">
+        <div class="form-group">
+            <label class="form-label" for="description">
                 Descripción
             </label>
             <textarea name="description" id="description" 
-                      class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                      class="form-input"
                       rows="3"></textarea>
         </div>
 
-        <div class="mb-4">
-            <label class="block text-gray-700 text-sm font-bold mb-2" for="frequency">
+        <div class="form-group">
+            <label class="form-label" for="frequency">
                 Frecuencia
             </label>
             <input type="number" name="frequency" id="frequency" 
-                   class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                   class="form-input"
                    min="1" required>
         </div>
 
-        <div class="mb-4">
-            <label class="block text-gray-700 text-sm font-bold mb-2" for="frequency_type">
+        <div class="form-group">
+            <label class="form-label" for="frequency_type">
                 Tipo de Frecuencia
             </label>
             <select name="frequency_type" id="frequency_type" 
-                    class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                    class="form-input form-select"
                     required>
                 <option value="daily">Diario</option>
                 <option value="weekly">Semanal</option>
@@ -46,22 +46,18 @@
             </select>
         </div>
 
-        <!-- Después del campo frequency_type -->
-        <div class="mb-4">
-            <label class="block text-gray-700 text-sm font-bold mb-2" for="reminder_time">
+        <div class="form-group">
+            <label class="form-label" for="reminder_time">
                 Hora de Recordatorio
             </label>
             <input type="time" name="reminder_time" id="reminder_time" 
-                   class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
-            <p class="text-sm text-gray-500 mt-1">Opcional: Establece una hora para recibir recordatorios</p>
+                   class="form-input">
+            <p class="form-hint">Opcional: Establece una hora para recibir recordatorios</p>
         </div>
 
-        <div class="flex items-center justify-end">
-            <button type="submit" 
-                    class="bg-emerald-500 hover:bg-emerald-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">
-                Crear Hábito
-            </button>
-        </div>
+        <button type="submit" class="submit-button">
+            Crear Hábito
+        </button>
     </form>
 </div>
 @endsection

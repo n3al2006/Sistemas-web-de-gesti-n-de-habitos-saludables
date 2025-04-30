@@ -14,9 +14,9 @@
             <div class="nav-links">
                 <a href="{{ route('admin.habits.index') }}" class="nav-link">Habits</a>
                 <a href="{{ route('admin.dashboard') }}" class="nav-link">Dashboard</a>
-                <form action="{{ route('logout') }}" method="POST" class="d-inline">
+                <form action="{{ route('admin.logout') }}" method="POST" class="d-inline">
                     @csrf
-                    <button type="submit" class="nav-link logout">Logout</button>
+                    <button type="submit" class="nav-link logout">Cerrar Sesión</button>
                 </form>
             </div>
         </div>

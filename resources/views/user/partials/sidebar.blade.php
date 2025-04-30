@@ -1,36 +1,54 @@
-<div class="w-64 bg-gray-800 text-white">
-    <div class="p-4">
-        <h1 class="text-2xl font-bold text-emerald-400">🌱 HabitHub</h1>
+<div class="sidebar">
+    <div class="sidebar-logo">
+        <span>🌱</span>
+        <h1>HabitHub</h1>
     </div>
-    <nav class="mt-4">
-        <a href="{{ route('dashboard') }}" class="flex items-center px-4 py-2 {{ request()->routeIs('dashboard') ? 'bg-gray-700' : '' }} text-white hover:bg-gray-700">
-            <span class="mr-2">📊</span> Hábitos
+
+    <nav>
+        <a href="{{ route('dashboard') }}" 
+           class="nav-item {{ request()->routeIs('dashboard') ? 'active' : '' }}">
+            <span class="nav-icon">📊</span>
+            Hábitos
         </a>
-        <a href="{{ route('user.habits.recommended') }}" class="flex items-center px-4 py-2 {{ request()->routeIs('user.habits.recommended') ? 'bg-gray-700' : '' }} text-gray-300 hover:bg-gray-700">
-            <span class="mr-2">⭐</span> Recomendados
+        <a href="{{ route('user.habits.recommended') }}" 
+           class="nav-item {{ request()->routeIs('user.habits.recommended') ? 'active' : '' }}">
+            <span class="nav-icon">⭐</span>
+            Recomendados
         </a>
-        <a href="#" class="flex items-center px-4 py-2 text-gray-300 hover:bg-gray-700">
-            <span class="mr-2">🎯</span> Desafíos
+        <a href="{{ route('habits.challenge.index') }}" class="nav-item {{ request()->routeIs('habits.challenge.index') ? 'active' : '' }}">
+            <span class="nav-icon">🎯</span>
+            Desafíos
         </a>
-        <a href="#" class="flex items-center px-4 py-2 text-gray-300 hover:bg-gray-700">
-            <span class="mr-2">📈</span> Progreso
+        <a href="{{ route('habits.showProgress') }}" class="nav-item {{ request()->routeIs('habits.showProgress') ? 'active' : '' }}">
+            <span class="nav-icon">📈</span>
+            Progreso
         </a>
-        <a href="#" class="flex items-center px-4 py-2 text-gray-300 hover:bg-gray-700">
-            <span class="mr-2">🥗</span> Recetas
+        <a href="{{ route('habits.indexRece') }}" class="nav-item {{ request()->routeIs('habits.indexRece') ? 'active' : '' }}">
+            <span class="nav-icon">🥗</span>
+            Recetas
         </a>
     </nav>
 
-    <div class="mt-auto p-4 border-t border-gray-700">
-        <div class="flex items-center mb-2">
-            <span class="mr-2">👋</span>
-            <span>Hola, {{ Auth::user()->name }}</span>
+    <div class="user-section">
+        <div class="user-profile">
+            <div class="user-avatar">
+                {{ substr(Auth::user()->name, 0, 2) }}
+            </div>
+            <div class="user-info">
+                <h3>{{ Auth::user()->name }}</h3>
+                <p>Miembro activo</p>
+            </div>
         </div>
-        <a href="{{ route('profile.edit') }}" class="text-sm text-gray-400 hover:text-white block">
+        
+        <a href="{{ route('profile.edit') }}" class="nav-item">
+            <span class="nav-icon">👤</span>
             Editar perfil
         </a>
-        <form method="POST" action="{{ route('logout') }}" class="mt-2">
+        
+        <form method="POST" action="{{ route('logout') }}">
             @csrf
-            <button type="submit" class="text-sm text-gray-400 hover:text-white">
+            <button type="submit" class="nav-item w-full text-left">
+                <span class="nav-icon">🚪</span>
                 Cerrar Sesión
             </button>
         </form>

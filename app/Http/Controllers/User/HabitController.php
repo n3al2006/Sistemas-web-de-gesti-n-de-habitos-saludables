@@ -29,6 +29,10 @@ class HabitController extends Controller
         return view('user.dashboard', compact('allHabits', 'todayProgress'));
     }
 
+    public function showProgress(){
+        return view('user.navs.progress');
+    }
+
     public function create()
     {
         return view('user.habits.create');
@@ -138,4 +142,6 @@ class HabitController extends Controller
     
         return back()->with('error', 'Ya has adoptado este hábito');
     }
+
+    
 }

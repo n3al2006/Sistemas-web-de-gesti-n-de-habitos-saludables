@@ -16,29 +16,30 @@ class AdminAuthController extends Controller
     public function login(Request $request)
     {
         $credentials = $request->validate([
-            'email' => 'required|email',
+            'username' => 'required',
             'password' => 'required'
         ]);
 
-        if (Auth::attempt($credentials)) {
-            $user = Auth::user();
-            if ($user->rol_id === 1) {
-                $request->session()->regenerate();
-                return redirect()->route('admin.dashboard');
-            }
-            Auth::logout();
+        $admin = \App\Models\Admin::where('username', $credentials['username'])
+                                 ->where('password', $credentials['password'])
+                                 ->first();
+
+        if ($admin) {
+            Auth::guard('admin')->login($admin);
+            $request->session()->regenerate();
+            return redirect()->route('admin.dashboard');
         }
 
         return back()->withErrors([
-            'email' => 'Las credenciales proporcionadas no son válidas.',
+            'username' => 'Las credenciales proporcionadas no son válidas.',
         ]);
     }
 
     public function logout(Request $request)
     {
-        Auth::logout();
+        Auth::guard('admin')->logout();
         $request->session()->invalidate();
         $request->session()->regenerateToken();
-        return redirect()->route('admin.login');
+        return redirect('/');  // Esto redirigirá a welcome.blade.php
     }
 }
